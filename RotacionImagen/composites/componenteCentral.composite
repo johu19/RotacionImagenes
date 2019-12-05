@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://www.osoa.org/xmlns/sca/1.0"
+	xmlns:frascati="http://frascati.ow2.org/xmlns/sca/1.1" targetNamespace="http://frascati.ow2.org/mqcafe"
+	name="componenteCentral">
+
+	<component name="p">
+		<implementation.java class="InterfazComunicacion" />
+		<service name="r">
+			<interface.java interface="java.lang.Runnable" />
+		</service>
+
+		<reference name="recibirDatos">
+			<interface.java interface="Nodo.InterfazCom" />
+			<frascati:binding.rmi host="<ipNodo>" serviceName="rmiService6"
+				port="1130">
+			</frascati:binding.rmi>
+		</reference>
+
+		<reference name="rotarImagen">
+			<interface.java interface="Nodo.InterfazCom" />
+			<frascati:binding.rmi host="<ipNodo>" serviceName="rmiService8"
+				port="1120">
+			</frascati:binding.rmi>
+		</reference>
+
+		<reference name="retornarUbicacion">
+			<interface.java interface="Broker.Comunicacion" />
+			<frascati:binding.rmi host="<ipNodo>" serviceName="rmiService12"
+				port="1100">
+			</frascati:binding.rmi>
+		</reference>
+
+	</component>
+	
+	<service name="r" promote="p/r">
+		<interface.java interface="java.lang.Runnable"></interface.java>
+	</service>
+
+
+
+</composite>

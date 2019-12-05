@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://www.osoa.org/xmlns/sca/1.0"
+	xmlns:frascati="http://frascati.ow2.org/xmlns/sca/1.1" targetNamespace="http://frascati.ow2.org/mqcafe"
+	name="broker">
+
+	<component name="p">
+		<implementation.java class="Comunicacion" />
+		<service name="r">
+			<interface.java interface="java.lang.Runnable" />
+		</service>
+		
+		<service name="retornarUbicacion">
+		   <interface.java interface="Broker.Comunicacion" />
+			<frascati:binding.rmi host="localhost" serviceName="rmiService12"
+				port="1100">
+			</frascati:binding.rmi>
+		</service>
+
+		<service name="guardarUbicacionCliente">
+		   <interface.java interface="Broker.Comunicacion" />
+			<frascati:binding.rmi host="localhost" serviceName="rmiService10"
+				port="1110">
+			</frascati:binding.rmi>
+		</service>
+
+	</component>
+	
+	<service name="r" promote="p/r">
+		<interface.java interface="java.lang.Runnable"></interface.java>
+	</service>
+
+
+
+</composite>
